@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="inline-buttons">
+        <button class="btn btn-primary addPc" (click)="creatGroupClicked()">Create Group</button>
+        <button class="btn btn-outline" (click)="downloadCSV()">Download CSV</button>
+        <div class="uxd-search-input">
+            <clr-icon shape="search"></clr-icon>
+            <input style="border: none" placeholder="Min 3 Chars" (input)="searchNestedList($event)" />
+        </div>
+    </div>
+    <clr-datagrid>
+        <clr-dg-column>Site</clr-dg-column>
+        <clr-dg-column>Group</clr-dg-column>
+        <clr-dg-row *clrDgItems="let site of sitesWithGroups" [clrDgItem]="site" [(clrDgExpanded)]="site.expanded">
+            <clr-dg-cell>{{ site.Site }}</clr-dg-cell>
+            <clr-dg-cell>{{ site.Group.length }} Groups</clr-dg-cell>
+            <ng-container ngProjectAs="clr-dg-row-detail">
+                <ng-container *clrIfExpanded="site.expanded">
+                    <clr-dg-row-detail *ngFor="let child of site.Group">
+                        <clr-dg-action-overflow>
+                            <button class="action-item" (click)="openEditGroup(site.Site, child)">
+                                Edit
+                            </button>
+                            <button class="action-item" (click)="openDeleteGroup(child)">
+                                Delete
+                            </button>
+                        </clr-dg-action-overflow>
+                        <clr-dg-cell></clr-dg-cell>
+                        <clr-dg-cell>{{ child.name }}</clr-dg-cell>
+                    </clr-dg-row-detail>
+                </ng-container>
+            </ng-container>
+        </clr-dg-row>
+        <clr-dg-footer>
+            <clr-dg-pagination #pagination [clrDgPageSize]="10" [clrDgTotalItems]="groupData?.length">
+                <clr-dg-page-size [clrPageSizeOptions]="[10,20]">Groups per page</clr-dg-page-size>
+                {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                of {{pagination.totalItems}} Groups
+            </clr-dg-pagination>
+        </clr-dg-footer>
+    </clr-datagrid>
+</div>
+<div *ngIf="createGroup">
+    <app-create-group (closeCreateGroupModal)="closeCreateGroupModal()"></app-create-group>
+</div>
+<app-edit-group *ngIf="openEditGroupPopup" [editGroupData]="editGroupData" (closeEditGroupModal)="closeEditGroupModal()"></app-edit-group>
+<app-delete-group *ngIf="openDeleteGroupPopup" [deleteGroupData]="deleteGroupData" (closeDeleteGroupPopup)="closeDeleteGroupPopup()"></app-delete-group>

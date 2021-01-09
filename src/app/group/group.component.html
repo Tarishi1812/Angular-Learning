@@ -1,0 +1,30 @@
+<div class="container">
+    <clr-tabs>
+        <clr-tab>
+            <button clrTabLink id="link1">PCs</button>
+            <clr-tab-content id="content1" *clrIfActive="true">
+                <div class="inline-buttons">
+                    <button class="btn btn-primary addPc" (click)="addPcClicked()">Add PC</button>
+                    <button class="btn btn-outline" (click)="downloadCSV()">Download CSV</button>
+                    <div class="uxd-search-input">
+                        <clr-icon shape="search"></clr-icon>
+                        <input style="border: none" placeholder="Min 3 Chars" (input)="searchList($event)" />
+                    </div>
+                </div>
+                <app-pc-list [pcData]="pcData"></app-pc-list>
+            </clr-tab-content>
+        </clr-tab>
+        <clr-tab>
+            <button clrTabLink>Groups</button>
+            <clr-tab-content *clrIfActive>
+                <app-group-list></app-group-list>
+            </clr-tab-content>
+        </clr-tab>
+    </clr-tabs>
+    <!-- <div class="inline-buttons">
+        <a routerLink="/grouplist"><button class="btn btn-primary">View Groups</button></a>
+    </div> -->
+    <div *ngIf="addPc">
+        <app-add-pc (closeAddPcModal)="closeAddPcModal()"></app-add-pc>
+    </div>
+</div>

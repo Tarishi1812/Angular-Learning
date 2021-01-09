@@ -1,0 +1,37 @@
+<div class="modal">
+    <div class="modal-dialog modal-md" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-label="Close" class="close" type="button" (click)="closeModal()">
+                    <clr-icon aria-hidden="true" shape="close"></clr-icon>
+                </button>
+                <h3 class="modal-title">Enter Group Details</h3>
+            </div>
+            <div class="modal-body modal-md">
+                <form clrForm clrLayout="vertical" [formGroup]="createGroup">
+                    <clr-select-container class="form-control form-custom-width">
+                        <label for="">Select Site</label>
+                        <select clrSelect formControlName="Site" required class="mTop">
+                            <option value="" hidden>Select Site</option>
+                            <option *ngFor="let site of sites">{{ site }}</option>
+                        </select>
+                    </clr-select-container>
+                    <clr-input-container class="form-control form-custom-width">
+                        <label>Enter Groupname</label>
+                        <input
+                          [ngStyle]="createGroup.value.Site === '' && { 'pointer-events' : 'none' }"
+                          clrInput
+                          type="text"
+                          (ngModelChange)="groupNameChanged()"
+                          formControlName="Group"
+                          required
+                        />
+                    </clr-input-container>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" (click)="saveGroup()" [disabled]="!groupNameExists">Create</button>
+            </div>
+        </div>
+    </div>
+</div>

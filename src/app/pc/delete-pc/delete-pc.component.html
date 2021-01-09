@@ -1,0 +1,19 @@
+<div class="modal">
+    <div class="modal-dialog modal-md" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-label="Close" class="close" type="button" (click)="closeModal()">
+                    <clr-icon aria-hidden="true" shape="close"></clr-icon>
+                </button>
+                <h3 class="modal-title">Delete PC</h3>
+            </div>
+            <div class="modal-body modal-md">
+                <p>Remove PC Permanently?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" (click)="deletePcDetails()">Yes</button>
+                <button class="btn btn-primary" (click)="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

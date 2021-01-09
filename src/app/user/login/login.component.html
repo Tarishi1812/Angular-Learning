@@ -1,0 +1,35 @@
+<div class="container">
+    <form clrForm clrLayout="vertical" [formGroup]="userForm">
+        <clr-input-container>
+            <label>Enter Username</label>
+            <input
+              clrInput
+              type="text"
+              (ngModelChange)="checkValues()"
+              formControlName="uName"
+              required
+            />
+        </clr-input-container>
+        <clr-input-container>
+            <label>Enter Password</label>
+            <input
+              clrInput
+              type="password"
+              (ngModelChange)="checkValues()"
+              formControlName="uPass"
+              required
+            />
+        </clr-input-container>
+        <clr-input-container>
+            <label>Enter Email</label>
+            <input
+                clrInput
+                type="email"
+                (ngModelChange)="checkValues()"
+                formControlName="uEmail"
+                required
+            />
+        </clr-input-container>
+        <button type="submit" class="btn btn-success" [disabled]="!enableButton" (click)="saveDetails()">Login</button>
+    </form>
+</div>

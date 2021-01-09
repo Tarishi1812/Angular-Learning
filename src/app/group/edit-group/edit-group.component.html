@@ -1,0 +1,30 @@
+<div class="modal">
+    <div class="modal-dialog modal-md" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-label="Close" class="close" type="button" (click)="closeModal()">
+                    <clr-icon aria-hidden="true" shape="close"></clr-icon>
+                </button>
+                <h3 class="modal-title">Edit Group</h3>
+            </div>
+            <div class="modal-body modal-md">
+                <form clrForm clrLayout="vertical" [formGroup]="editGroup">
+                    <clr-input-container class="form-custom-width">
+                        <label>Enter Modified Groupname</label>
+                        <input
+                          value="editGroupData.Group.name"
+                          clrInput
+                          type="text"
+                          (ngModelChange)="checkValues()"
+                          formControlName="Group"
+                          required
+                        />
+                    </clr-input-container>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" [disabled]="!groupDetailsComplete" (click)="editGroupDetails()">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>

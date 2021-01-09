@@ -1,0 +1,37 @@
+<clr-datagrid>
+    <clr-dg-column>Site</clr-dg-column>
+    <clr-dg-column>Group</clr-dg-column>
+    <clr-dg-column>ServiceTag</clr-dg-column>
+    <clr-dg-column>WarrantyPlan</clr-dg-column>
+    <clr-dg-column>Region</clr-dg-column>
+    <clr-dg-column>OS</clr-dg-column>
+
+
+    <clr-dg-row *clrDgItems="let pc of pcData" [clrDgItem]="pc">
+        <clr-dg-action-overflow>
+            <button class="action-item" (click)="openEditPc(pc)">
+              Edit
+            </button>
+            <!--device count zero and not default-->
+            <button class="action-item" (click)="openDeletePc(pc)">
+              Delete
+            </button>
+        </clr-dg-action-overflow>
+        <clr-dg-cell>{{ pc.Site }}</clr-dg-cell>
+        <clr-dg-cell>{{ pc.Group }}</clr-dg-cell>
+        <clr-dg-cell>{{ pc.ServiceTag }}</clr-dg-cell>
+        <clr-dg-cell>{{ pc.WarrantyPlan }}</clr-dg-cell>
+        <clr-dg-cell>{{ pc.Region }}</clr-dg-cell>
+        <clr-dg-cell>{{ pc.OS }}</clr-dg-cell>
+    </clr-dg-row>
+
+    <clr-dg-footer>
+        <clr-dg-pagination #pagination [clrDgPageSize]="10" [clrDgTotalItems]="pcData?.length">
+            <clr-dg-page-size [clrPageSizeOptions]="[10,20]">PCs per page</clr-dg-page-size>
+            {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+            of {{pagination.totalItems}} Pcs
+        </clr-dg-pagination>
+    </clr-dg-footer>
+</clr-datagrid>
+<app-edit-pc *ngIf="openEditPcPopup" [editPcData]="editPcData" (closeEditPcModal)="closeEditPcModal()"></app-edit-pc>
+<app-delete-pc *ngIf="openDeletePcPopup" [deletePcData]="deletePcData" (closeDeletePcPopup)="closeDeletePcPopup()"></app-delete-pc>

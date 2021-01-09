@@ -1,0 +1,71 @@
+<div class="modal">
+    <div class="modal-dialog modal-md" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-label="Close" class="close" type="button" (click)="closeModal()">
+                    <clr-icon aria-hidden="true" shape="close"></clr-icon>
+                </button>
+                <h3 class="modal-title">Enter Modified PC Details</h3>
+            </div>
+            <div class="modal-body modal-md">
+                <form clrForm clrLayout="vertical" [formGroup]="editPc">
+                    <clr-select-container class="form-custom-width">
+                        <label for="">Select Site</label>
+                        <select 
+                        clrSelect 
+                        formControlName="Site" 
+                        required 
+                        class="mTop" 
+                        disabled
+                        >
+                        <option [ngValue]="editPcData.Site">{{ editPcData.Site }}</option>
+                        </select>
+                    </clr-select-container>
+                    <clr-select-container class="form-custom-width">
+                        <label for="">Select Group</label>
+                        <select 
+                        clrSelect 
+                        formControlName="Group" 
+                        required 
+                        class="mTop" 
+                        (ngModelChange)="checkValues()">
+                            <option *ngFor="let group of groups" [ngValue]="group">{{ group }}</option>
+                        </select>
+                    </clr-select-container>
+                    <clr-input-container class="form-custom-width">
+                        <label>Enter ServiceTag</label>
+                        <input
+                          value="editPcData.ServiceTag"
+                          clrInput
+                          type="text"
+                          (ngModelChange)="checkValues()"
+                          formControlName="ServiceTag"
+                          required
+                        />
+                    </clr-input-container>
+                    <clr-select-container class="form-custom-width">
+                        <label for="">Select Warranty</label>
+                        <select clrSelect formControlName="WarrantyPlan" required class="mTop" (ngModelChange)="checkValues()">
+                            <option *ngFor="let war of warranty" [ngValue]="war">{{ war }}</option>
+                        </select>
+                    </clr-select-container>
+                    <clr-select-container class="form-custom-width">
+                        <label for="">Select Region</label>
+                        <select clrSelect formControlName="Region" required class="mTop" (ngModelChange)="checkValues()">
+                            <option *ngFor="let reg of region" [ngValue]="reg">{{ reg }}</option>
+                        </select>
+                    </clr-select-container>
+                    <clr-select-container class="form-custom-width">
+                        <label for="">Select OS</label>
+                        <select clrSelect formControlName="OS" required class="mTop" (ngModelChange)="checkValues()">
+                            <option *ngFor="let os of os" [ngValue]="os">{{ os }}</option>
+                        </select>
+                    </clr-select-container>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" [disabled]="!pcDetailsComplete" (click)="editPcDetails()">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
